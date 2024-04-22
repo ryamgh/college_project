@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{details.image.url}}" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="profile-details">
+                                <h2 class="mb-4">{{details.donor.get_full_name}}</h2>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">Blood Group:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.blood_group}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">Gender:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.gender}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">Email:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.donor.email}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">Phone:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.phone}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">State:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.state}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">City:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.city}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">Address:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.address}}</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <h5 class="text-muted">Date of Birth:</h5>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h5>{{details.date_of_birth}}</h5>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock %}

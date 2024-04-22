@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <div style="width: 200px; height: 200px; overflow: hidden; border-radius: 10px;">
+                        <img src="{{donor_profile.image.url}}" alt="Profile Image" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    {% if donor_profile.ready_to_donate %}
+                    <a href="/change_status/" class="btn btn-success btn-block mt-3">I'm Ready To Donate</a>
+                    {% else %}
+                    <a href="/change_status/" class="btn btn-danger btn-block mt-3">I'm Not Ready To Donate</a>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <h3>Username:</h3>
+                    <p>{{user}}</p>
+                    <h3>Full Name:</h3>
+                    <p>{{user.get_full_name}}</p>
+                    <h3>Email:</h3>
+                    <p>{{user.email}}</p>
+                    <h3>Phone Number:</h3>
+                    <p>{{donor_profile.phone}}</p>
+                    <h3>Gender:</h3>
+                    <p>{{donor_profile.gender}}</p>
+                    <h3>Date of Birth:</h3>
+                    <p>{{donor_profile.date_of_birth}}</p>
+                    <h3>State:</h3>
+                    <p>{{donor_profile.state}}</p>
+                    <h3>City:</h3>
+                    <p>{{donor_profile.city}}</p>
+                    <h3>Address:</h3>
+                    <p>{{donor_profile.address}}</p>
+                    <h3>Blood Group:</h3>
+                    <p>{{donor_profile.blood_group}}</p>
+                    <br>
+                    <a href="/edit_profile/" class="btn btn-outline-danger btn-block mt-4">Edit Profile</a>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

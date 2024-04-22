@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block css %}
+<style>
+    .table th,
+    .table td {
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .table-success {
+        background-color: #d4edda !important;
+    }
+
+    .table-danger {
+        background-color: #f8d7da !important;
+    }
+
+    .table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-view {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+    .btn-view:hover {
+        background-color: #0056b3;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    {% if donor %}
+    <h3 class="text-center mt-4 mb-5">All Donors</h3>
+    <table class="table table-sm table-bordered">
+        <thead>
+            <tr class="table-secondary">
+                <th>Name</th>
+                <th>Blood Group</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in donor %}
+            <tr class="{% if i.ready_to_donate %}table-success{% else %}table-danger{% endif %}">
+                <td>{{i.donor.get_full_name}}</td>
+                <td>{{i.blood_group}}</td>
+                <td>{{i.state}} | {{i.city}}</td>
+                <td>{% if i.ready_to_donate %}Ready To Donate{% else %}Not Ready To Donate{% endif %}</td>
+                <td><a href="/donors_details/{{i.id}}/" class="btn btn-sm btn-view">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h2 class="text-center mt-5">No Donors Available</h2>
+    {% endif %}
+</div>
+{% endblock %}

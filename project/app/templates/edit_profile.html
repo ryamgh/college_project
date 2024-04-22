@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <h3 class="mb-4">Edit Profile</h3>
+    <form method="POST" enctype="multipart/form-data" class="p-4 border rounded">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" value="{{user}}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" value="{{request.user.first_name}}" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" value="{{request.user.last_name}}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email ID</label>
+                    <input type="email" class="form-control" value="{{request.user.email}}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="tel" class="form-control" value="{{donor_profile.phone}}">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" class="form-control" value="{{donor_profile.state}}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" value="{{donor_profile.city}}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label>Address</label>
+            <textarea class="form-control" rows="3">{{donor_profile.address}}</textarea>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <input type="text" class="form-control" value="{{donor_profile.gender}}" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Blood Group</label>
+                    <input type="text" class="form-control" value="{{donor_profile.blood_group}}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Profile Photo <a href="{{donor_profile.image.url}}" class="ms-2">Click here to view the current profile</a></label>
+                    <input type="file" class="form-control" id="image" name="image">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Date Of Birth</label>
+                    <input type="date" class="form-control" value="{{donor_profile.date_of_birth}}" readonly>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Profile Updated Successfully");
+    document.location = "/profile";
+    {% endif %}
+</script>
+{% endblock %}
