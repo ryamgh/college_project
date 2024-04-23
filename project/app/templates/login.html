@@ -2,9 +2,17 @@
 
 {% block css %}
 {% endblock %}
+
 {% block body %}
 <form method="POST"> {% csrf_token %}
     <div class="container mt-5">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="alert alert-danger">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="mb-3">
             <label for="username" class="form-label"><i style="font-weight: bold;">Username</i></label>
             <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
@@ -22,12 +30,6 @@
     <br>
 </form>
 {% endblock %}
-{% block js %}
-<script>
-    {% if alert %}
-    alert("Inavalid Credentials");
-    document.location = "/login"
-    {% endif %}
-</script>
-{% endblock %}
 
+{% block js %}
+{% endblock %}

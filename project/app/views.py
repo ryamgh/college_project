@@ -4,7 +4,15 @@ from . models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.contrib import messages
 
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
+from . models import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 def index(request):
     all_group = BloodGroup.objects.annotate(total=Count('donor'))
@@ -38,7 +46,7 @@ def see_all_request(request):
     requests = RequestBlood.objects.all()
     return render(request, "see_all_request.html", {'requests':requests})
 
-def become_donor(request):
+""" def become_donor(request):
     if request.method=="POST":   
         username = request.POST['username']
         first_name = request.POST['first_name']
@@ -64,9 +72,54 @@ def become_donor(request):
         user.save()
         donors.save()
         return render(request, "index.html")
+    return render(request, "become_donor.html") """
+from django.contrib.auth import authenticate, login
+
+def become_donor(request):
+    if request.method == "POST":   
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        state = request.POST['state']
+        city = request.POST['city']
+        address = request.POST['address']
+        gender = request.POST['gender']
+        blood_group = request.POST['blood_group']
+        date = request.POST['date']
+        image = request.FILES['image']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return redirect('/signup')
+
+        # Create the user
+        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password)
+
+        # Create the donor profile
+        donor = Donor.objects.create(donor=user, phone=phone, state=state, city=city, address=address, gender=gender, blood_group=BloodGroup.objects.get(name=blood_group), date_of_birth=date, image=image)
+
+        # Save both user and donor
+        user.save()
+        donor.save()
+
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to an authenticated page
+            return redirect('profile')  # Replace 'authenticated_page_url' with the URL name of the page you want to redirect to after authentication
+        else:
+            messages.error(request, "Authentication failed.")
+            return redirect('/signup')  # Redirect to signup page if authentication fails
+
     return render(request, "become_donor.html")
 
-def Login(request):
+
+""" def Login(request):
     if request.user.is_authenticated:
         return redirect("/")
     else:
@@ -81,7 +134,28 @@ def Login(request):
             else:
                 thank = True
                 return render(request, "user_login.html", {"thank":thank})
+    return render(request, "login.html") """
+from django.contrib import messages
+
+from django.contrib import messages
+
+def Login(request):
+    if request.user.is_authenticated:
+        return redirect("/")
+    else:
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("/profile")
+            else:
+                messages.error(request, "Invalid username or password.")
     return render(request, "login.html")
+
+
 
 def Logout(request):
     logout(request)
@@ -92,6 +166,33 @@ def profile(request):
     donor_profile = Donor.objects.get(donor=request.user)
     return render(request, "profile.html", {'donor_profile':donor_profile})
 
+@login_required(login_url = '/login')
+def edit_profile(request):
+    donor_profile = Donor.objects.get(donor=request.user)
+    if request.method == "POST":
+        email = request.POST['email']
+        phone = request.POST['phone']
+        state = request.POST['state']
+        city = request.POST['city']
+        address = request.POST['address']
+
+        donor_profile.donor.email = email
+        donor_profile.phone = phone
+        donor_profile.state = state
+        donor_profile.city = city
+        donor_profile.address = address
+        donor_profile.save()
+        donor_profile.donor.save()
+
+        try:
+            image = request.FILES['image']
+            donor_profile.image = image
+            donor_profile.save()
+        except:
+            pass
+        alert = True
+        return render(request, "edit_profile.html", {'alert':alert})
+    return render(request, "edit_profile.html", {'donor_profile':donor_profile})
 
 @login_required(login_url = '/login')
 def change_status(request):
@@ -103,47 +204,6 @@ def change_status(request):
         donor_profile.ready_to_donate = True
         donor_profile.save()
     return redirect('/profile')
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .models import Donor
-
-@login_required(login_url='/login')
-def edit_profile(request):
-    donor_profile = get_object_or_404(Donor, donor=request.user)
-    print("Donor profile:", donor_profile)  # Debug information
-
-    if request.method == "POST":
-        # Get the updated profile information from the form
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        state = request.POST.get('state')
-        city = request.POST.get('city')
-        address = request.POST.get('address')
-        image = request.FILES.get('image')
-
-        # Update the donor profile with the new information
-        donor_profile.donor.email = email
-        donor_profile.phone = phone
-        donor_profile.state = state
-        donor_profile.city = city
-        donor_profile.address = address
-        
-        # If a new image is provided, update the profile picture
-        if image:
-            donor_profile.image = image
-        
-        # Save the changes to the donor profile
-        donor_profile.donor.save()
-        donor_profile.save()
-
-        # Redirect to the profile page with a success message
-        messages.success(request, 'Profile updated successfully.')
-        return redirect('/profile')
-
-    # If the request method is GET, render the edit profile form
-    return render(request, "edit_profile.html", {'donor_profile': donor_profile})
-
 def why(request):
     return render(request,"why.html")
 def about_us(request):
