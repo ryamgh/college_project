@@ -1,0 +1,74 @@
+/* base.css */
+
+/* Navbar styles */
+.navbar {
+    background-color: #403c3d; /* Dark background color */
+}
+
+.navbar-brand img {
+    width: 120px; /* Adjust logo width */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 10px; /* Adjust margin between nav items */
+}
+
+.nav-link {
+    color: #010e12 !important; /* White color for nav links */
+    font-weight: bold;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #343a40; /* Dark background color */
+    color: #fff; /* White text color */
+}
+
+.footer a {
+    color: #ff0000; /* Red color for footer links */
+    font-weight: bold;
+}
+
+/* Container styles */
+.container {
+    background-color: #980505; /* Light gray background color */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(139, 70, 70, 0.1);
+}
+
+/* Form styles */
+.form-group label {
+    color: #333; /* Dark text color */
+}
+
+.form-control {
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-check-label {
+    color: #333; /* Dark text color */
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: #231718; /* Red background color */
+    border-color: #dc3545;
+    color: #fff; /* White text color */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #3c292b; /* Darker red color on hover */
+    border-color: #bd2130;
+}
+
+/* Footer image styles */
+.footer-logo {
+    width: 120px; /* Same as the navbar-brand logo width */
+}

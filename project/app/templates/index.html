@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Blood Donation {% endblock %}
 {% block css %}
 {% endblock %}
 {% block body %}
-<div class="container">
-<h1>Available Donors According To Blood Group</h1>
+
+<h2 class="text-center">All Blood Requests</h2>
   <div class="album py-5 bg-light">
+    <br>
     <div class="container">
       <div class="row">
         {% for i in all_group %}
@@ -27,5 +27,6 @@
       </div>
     </div>
   </div>
-</div>
+
+
 {% endblock %}

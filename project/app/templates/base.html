@@ -1,67 +1,5 @@
-{% comment %} <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{%load static%}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <title>{% block title %}{% endblock %}</title>
-    <style>
-        .navbar {
-            background-color: #cc1609;
-        }
-    </style>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <a class="navbar-brand" href="/">RedCare</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="container w-75">
-            <div class="navbar-nav">
-                {% if request.user.is_authenticated %}
-                <a class="nav-item nav-link active" href="/profile/">Profile</a>
-                <a class="nav-item nav-link active" href="/edit_profile/">Edit Profile</a>
-                <a class="nav-item nav-link active" href="/see_all_request/">See All Request</a>
-                <a class="nav-item nav-link active" href="/logout/">Logout</a>
-                {% else %}
-                <a class="nav-item nav-link active" href="/">All Donors</a>
-                <a class="nav-item nav-link active" href="/request_blood/">Request For Blood</a>
-                <a class="nav-item nav-link active" href="/see_all_request/">See All Request</a>
-                <a class="nav-item nav-link active" href="/become_donor/">Register As Donor</a>
-                <a class="nav-item nav-link active" href="/login/">Login</a>
-                {% endif %}
-            </div>
-            {% if request.user.is_authenticated %}
-            <a href="#" class="nav-item nav-link active" style="color: white;">Welcome {{request.user}}</a>
-            {% endif %}
-        </div>
-        </div>
-    </nav><br>
-
-        {% block body %}
-        {% endblock %}
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
-
-        {% block js %}
-        {% endblock %}
-</body> 
-</html> {% endcomment %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -70,41 +8,19 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
 
-    <title>{% block title %}{% endblock %}</title>
-    <style>
-        .navbar,
-        .footer {
-            background-color: #353935;
-            color: white;
-        }
-        .footer ul {
-            list-style-type: none;
-            padding: 30;
-        }
-        .footer ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        .footer .logo {
-            display: block;
-            margin: 0 auto;
-            margin-top: 20px; /* Adjust as needed */
-        }
-        .logo {
-            max-height: 45px; /* Adjust the value as needed */
-{% comment %}             width: 150px; /* Adjust the width according to your preference */
-            height: auto; /* Maintain the aspect ratio */
-            margin-top: 20px; /* Adjust the margin to center vertically */ {% endcomment %}
-        }
-        .logo-img {
-            max-height: 45px; /* Adjust the value as needed */
-        }
-    </style>
+    
+    {%block css%}
+    {%endblock%}
+    
+
 </head>
 
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        
         <a class="navbar-brand" href="/">
             <img src="https://i.ibb.co/ZWFBRpj/image-removebg-preview-1.png" alt="RedCare Logo" class="logo-img">
         </a>
@@ -138,16 +54,16 @@
     <br>
 
     {% block body %}
+    
     {% endblock %}
-
-    <footer class="footer mt-auto py-1">
-        <br>
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <!-- Image Column -->
-                <div class="col-12 col-md-6 text-center mb-0 mb-md-1">
-                    <img src="https://i.ibb.co/ZWFBRpj/image-removebg-preview-1.png" href="/" alt="RedCare Logo" class="logo">
-                </div>
+  <br>
+  <footer class="footer mt-auto py-1">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <!-- Image Column -->
+            <div class="col-12 col-md-6 text-center mb-0 mb-md-1">
+                <img src="https://i.ibb.co/ZWFBRpj/image-removebg-preview-1.png" href="/" alt="RedCare Logo" class="footer-logo">
+            </div>
                 <!-- Navigation Column -->
                 <div class="col-md-12 text-md-center">
                     <ul class="list-inline mb-0">

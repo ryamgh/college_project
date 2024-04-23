@@ -1,0 +1,43 @@
+/* become_donor.css */
+
+/* Styles for the registration form */
+.registration-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.registration-container h4 {
+    color: #007bff;
+}
+
+.registration-container .form-group label {
+    color: #333;
+}
+
+.registration-container .form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.registration-container .form-check-label {
+    color: #333;
+    margin-right: 10px;
+}
+
+.registration-container .btn-primary {
+    background-color: #06111c;
+    border-color: #080e15;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.registration-container .btn-primary:hover {
+    background-color: #b3000f;
+    border-color: #0056b3;
+}
