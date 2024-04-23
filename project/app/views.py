@@ -144,4 +144,7 @@ def edit_profile(request):
     # If the request method is GET, render the edit profile form
     return render(request, "edit_profile.html", {'donor_profile': donor_profile})
 
-
+def why(request):
+    return render(request,"why.html")
+def about_us(request):
+    return render(request,"aboutus.html")
